@@ -4,7 +4,405 @@
 		"name": "js-guru",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10205969",
-		"_collection_link": "https://web.postman.co/workspace/My-Workspace~1e78eed1-3045-4ad2-8b2d-f6a7310a9e01/collection/10205969-f7a5dd2d-a154-4524-8e92-961726534592?action=share&source=collection_link&creator=10205969"
+		"_collection_link": "https://planetary-meteor-43388.postman.co/workspace/My-Workspace~1e78eed1-3045-4ad2-8b2d-f6a7310a9e01/collection/10205969-f7a5dd2d-a154-4524-8e92-961726534592?action=share&source=collection_link&creator=10205969"
 	},
-	"item": []
+	"item": [
+		{
+			"name": "user-register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user-c@mail.com\",\n    \"firstName\": \"First c\",\n    \"lastName\": \"Last c\",\n    \"phone\": \"+38133233\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "register-user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user-a@mail.com\",\n    \"firstName\": \"First A\",\n    \"lastName\": \"Last A\",\n    \"phone\": \"+38133233\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "106"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6a-hp54YnaSAjbj5asgo5F9bheovxU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 04 Nov 2023 12:22:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"email\": \"user-a@mail.com\",\n    \"firstName\": \"First A\",\n    \"lastName\": \"Last A\",\n    \"phone\": \"+38133233\",\n    \"userId\": \"61843\"\n}"
+				}
+			]
+		},
+		{
+			"name": "user-login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user-c@mail.com\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user-@mail.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "31"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1f-GRJaMjBkGjfkfZSqZKXsmyEPmpI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 04 Nov 2023 13:17:46 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"invalid credentials\"\n}"
+				},
+				{
+					"name": "login-user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user-a@mail.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "access_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXItYUBtYWlsLmNvbSIsInN1YiI6MSwiaWF0IjoxNjk5MTAzOTQ5LCJleHAiOjE2OTkxMDc1NDl9.Clr_4bSufZ4gFS90Sy4MjkX77E-GPv2yeOZIcLz-PP8"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXItYUBtYWlsLmNvbSIsInN1YiI6MSwiaWF0IjoxNjk5MTAzOTQ5LCJleHAiOjE2OTkxOTAzNDl9.YcuRDNe10fYLT0rw5bX5DIf_3yoleMq6KhtIKANssyQ"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8-h5EdGu1QmHe4OkjsU292jNzSLfE\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 04 Nov 2023 13:19:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "create-product",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "access_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXItY0BtYWlsLmNvbSIsInN1YiI6Ijk4Mjg3IiwiaWF0IjoxNjk5MTI5OTIzLCJleHAiOjE2OTkxMzM1MjN9.HcZLxRnbJ8VKQ9MvSP7ueDiWikwl2fnvKkidMsSvbWQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"A2\",\n    \"description\": \"Description A1\",\n    \"price\": 3,\n    \"quantity\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/product",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-product",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "access_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXItY0BtYWlsLmNvbSIsInN1YiI6Ijk4Mjg3IiwiaWF0IjoxNjk5MTIzODY4LCJleHAiOjE2OTkxMjc0Njh9.EGQh5peAbgJEMWmLyaghCGyy3CQ26Y5i8u28idNcaeU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/product/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"product",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "13662"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-products",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "access_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXItY0BtYWlsLmNvbSIsInN1YiI6Ijk4Mjg3IiwiaWF0IjoxNjk5MTI5OTIzLCJleHAiOjE2OTkxMzM1MjN9.HcZLxRnbJ8VKQ9MvSP7ueDiWikwl2fnvKkidMsSvbWQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/product",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-product",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "access_token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXItY0BtYWlsLmNvbSIsInN1YiI6Ijk4Mjg3IiwiaWF0IjoxNjk5MTIzODY4LCJleHAiOjE2OTkxMjc0Njh9.EGQh5peAbgJEMWmLyaghCGyy3CQ26Y5i8u28idNcaeU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/product/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"product",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "13182"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXItYUBtYWlsLmNvbSIsInN1YiI6MSwiaWF0IjoxNjk5MTA4MDc4LCJleHAiOjE2OTkxMTE2Nzh9.RaMPNGsvhUUwTBJbOUHB3n3UpbTv2cswlDv--4ZqA6M"
+		},
+		{
+			"key": "refresh_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXItYUBtYWlsLmNvbSIsInN1YiI6MSwiaWF0IjoxNjk5MTA4MDc4LCJleHAiOjE2OTkxOTQ0Nzh9.fE_Rg1lRHpOrDe3ORq-30hlqTSd9MZJaMJmerAGuwCo"
+		}
+	]
 }

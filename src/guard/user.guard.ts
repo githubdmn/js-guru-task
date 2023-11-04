@@ -7,7 +7,6 @@ const userLogin = 'api/user/login';
 
 export class UserGuard implements CanActivate {
   checkArgs(method: string, url: string) {
-    console.log(method, url);
     return method === 'POST' && (url === userRegister || userLogin);
   }
   canActivate(

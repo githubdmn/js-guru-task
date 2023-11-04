@@ -1,4 +1,5 @@
 import { customAlphabet } from 'nanoid';
+const { v4: uuidv4 } = require('uuid');
 import {
   BeforeInsert,
   Column,
@@ -27,8 +28,9 @@ export default class Product {
   quantity: number;
   @BeforeInsert()
   generateId() {
-    const nanoid = customAlphabet('1234567890', 5);
-    this.productId = nanoid();
+    // const nanoid = customAlphabet('1234567890', 5);
+    // this.productId = nanoid();
+    this.productId = uuidv4().replace(/-/g, '').slice(0, 6);
   }
   @ManyToOne((type) => User, (user) => user.userId, {
     cascade: true,

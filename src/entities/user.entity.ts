@@ -1,4 +1,5 @@
 import { customAlphabet } from 'nanoid';
+const { v4: uuidv4 } = require('uuid');
 import {
   BeforeInsert,
   Column,
@@ -28,8 +29,9 @@ export default class User {
   phone: string;
   @BeforeInsert()
   generateId() {
-    const nanoid = customAlphabet('1234567890', 5);
-    this.userId = nanoid();
+    // const nanoid = customAlphabet('1234567890', 5);
+    // this.userId = nanoid();
+    this.userId = uuidv4().replace(/-/g, '').slice(0, 6);
   }
   @OneToMany((type) => Product, (product) => product.userId)
   product: Product[];
