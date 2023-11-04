@@ -20,8 +20,10 @@ export default class Product {
   @Column()
   name: string;
   @Column()
+  description: string;
+  @Column()
   price: number;
-	@Column()
+  @Column()
   quantity: number;
   @BeforeInsert()
   generateId() {

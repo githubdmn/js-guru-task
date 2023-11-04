@@ -1,5 +1,5 @@
-import { CreateProductRequest } from '@/dto';
-import { ProductEntity } from '@/entities';
+import { CreateProductRequest, CreateProductResponse } from '@/dto';
+import { ProductEntity, UserEntity } from '@/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -20,21 +20,48 @@ export class ProductService {
     return await this.productRepository.find();
   }
 
-  async getProductById(id: number): Promise<ProductEntity> {
-    const product = await this.productRepository.findOneBy({ id: id });
-    if (!product) throw new Error(`Product with ID ${id} not found`);
-    return product;
+  async getProductById(productId: string): Promise<CreateProductResponse> {
+    const product = await this.productRepository.findOneBy({
+      productId: productId,
+    });
+    if (!product) throw new Error(`Product with ID ${productId} not found`);
+    const user = product?.userId;
+    return this.mapProduct(product, user as unknown as UserEntity);
   }
 
   async deleteUserProductById(
-    id: number,
+    productId: string,
     userId: string,
   ): Promise<ProductEntity> {
-    const product = await this.getProductById(id);
-    if (userId !== product.userId)
+    const product = await this.productRepository.findOneBy({
+      productId: productId,
+    });
+    if (!product) throw new Error(`Product is not found`);
+    const extractedUserId = this.extractUserId(
+      product?.userId as unknown as UserEntity,
+    );
+    if (userId !== extractedUserId)
       throw new Error(
-        `Product with ID ${id} cannot be deleted by user with id ${userId}`,
+        `Product with ID ${productId} cannot be deleted by user with id ${userId}`,
       );
     return await this.productRepository.remove(product);
+  }
+
+  private mapProduct(
+    product: ProductEntity,
+    user: UserEntity,
+  ): CreateProductResponse {
+    return {
+      productId: product.productId,
+      description: product.description,
+      name: product.name,
+      price: product.price,
+      quantity: product.quantity,
+      userId: user.userId,
+    };
+  }
+
+  private extractUserId(user: UserEntity): string {
+    return user.userId;
   }
 }

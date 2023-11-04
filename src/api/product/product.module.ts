@@ -4,6 +4,8 @@ import { ProductService } from './product.service';
 import { PRODUCT_SERVICE } from '@/constants/instances.constants';
 import { ProductEntity, UserEntity } from '@/entities';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { JwtInterceptor } from '@/interceptor';
 
 const Services = [
   {

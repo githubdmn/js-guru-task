@@ -18,13 +18,9 @@ export class UserGuard implements CanActivate {
     const { access_token, refresh_token } = context
       .switchToHttp()
       .getRequest().headers;
-    if (!access_token || !refresh_token) return false;
-    try {
-      const result = verify(access_token, 'access');
-      if (!result) return false;
-      return true;
-    } catch {
-      return false;
-    }
+    if (!access_token) return false;
+    const result = verify(access_token, 'access');
+    if (!result) return false;
+    return true;
   }
 }

@@ -47,14 +47,14 @@ export class UserService implements IUser {
     const user = await this.getAuthenticatedUser(email, password);
     if (user) {
       const accessToken = await this.jwtService.signAsync(
-        { username: user.email, sub: user.id },
+        { username: user.email, sub: user.userId },
         {
           expiresIn: '1h',
           secret: 'access',
         },
       );
       const refreshToken = await this.jwtService.signAsync(
-        { username: user.email, sub: user.id },
+        { username: user.email, sub: user.userId },
         {
           expiresIn: '1d',
           secret: 'refresh',
@@ -63,7 +63,7 @@ export class UserService implements IUser {
       return {
         accessToken: accessToken,
         refreshToken: refreshToken,
-        id: user.id,
+        id: Number(user.userId),
       } as UserLoginResponse;
     } else
       return {
