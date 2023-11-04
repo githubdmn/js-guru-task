@@ -13,14 +13,19 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { IProduct } from './product.interface';
-import {
-  CreateProductRequest,
-  CreateProductResponse,
-  DeleteProductRequest,
-} from '@/dto';
+import { CreateProductRequest, CreateProductResponse } from '@/dto';
 import { JwtInterceptor, SerializeExclude } from '@/interceptor';
 import { ProductEntity } from '@/entities';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiCreatedResponse,
+  ApiUnauthorizedResponse,
+  ApiOkResponse,
+  ApiNotFoundResponse,
+} from '@nestjs/swagger';
 
+@ApiTags('Product')
 @UseInterceptors(JwtInterceptor)
 @UseGuards(UserGuard)
 @Controller('product')
@@ -29,6 +34,9 @@ export class ProductController {
 
   @Post()
   @SerializeExclude(CreateProductResponse)
+  @ApiOperation({ summary: 'Create a new product' })
+  @ApiCreatedResponse({ type: ProductEntity })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   async createProduct(
     @Request() request: any,
     @Body() product: CreateProductRequest,
@@ -39,18 +47,26 @@ export class ProductController {
 
   @Get(':id')
   @SerializeExclude(CreateProductResponse)
+  @ApiOperation({ summary: 'Get a product by ID' })
+  @ApiOkResponse({ type: ProductEntity })
+  @ApiNotFoundResponse({ description: 'Product not found' })
   async getProductById(@Param('id') id: number): Promise<ProductEntity> {
     return await this.productService.getProductById(id);
   }
 
   @Get()
   @SerializeExclude(CreateProductResponse)
+  @ApiOperation({ summary: 'Get all products' })
+  @ApiOkResponse({ type: ProductEntity, isArray: true })
   async getAllProducts(): Promise<ProductEntity[]> {
     return await this.productService.getAllProducts();
   }
 
   @Delete(':id')
   @SerializeExclude(CreateProductResponse)
+  @ApiOperation({ summary: 'Delete a product by ID' })
+  @ApiOkResponse({ type: ProductEntity })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   async deleteUserProductByProductId(
     @Request() request: any,
     @Param('id') id: number,
