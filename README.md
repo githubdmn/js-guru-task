@@ -13,7 +13,7 @@ npm run start:dev
 
 ### Run dockerized database
 
-`sudo docker-compose -f docker-compose-db.yaml up -d`
+`sudo docker-compose up -d`
 
 ## Setup for production
 
