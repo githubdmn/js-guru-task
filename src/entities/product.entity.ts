@@ -1,21 +1,9 @@
-import { customAlphabet } from 'nanoid';
-const { v4: uuidv4 } = require('uuid');
-import {
-  BeforeInsert,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { BeforeInsert, Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
 import User from './user.entity';
+import Base from './base.entity';
 
 @Entity()
-export default class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
+export default class Product extends Base {
   @Column({ unique: true })
   productId: string;
   @Column()
@@ -28,9 +16,7 @@ export default class Product {
   quantity: number;
   @BeforeInsert()
   generateId() {
-    // const nanoid = customAlphabet('1234567890', 5);
-    // this.productId = nanoid();
-    this.productId = uuidv4().replace(/-/g, '').slice(0, 6);
+    this.productId = super.idGenerator();
   }
   @ManyToOne((type) => User, (user) => user.userId, {
     cascade: true,
