@@ -24,7 +24,6 @@ import {
   ApiOkResponse,
   ApiNotFoundResponse,
 } from '@nestjs/swagger';
-
 @ApiTags('Product')
 @UseInterceptors(JwtInterceptor)
 @UseGuards(UserGuard)
@@ -33,9 +32,8 @@ export class ProductController {
   constructor(@Inject(PRODUCT_SERVICE) private productService: IProduct) {}
 
   @Post()
-  @SerializeExclude(CreateProductResponse)
   @ApiOperation({ summary: 'Create a new product' })
-  @ApiCreatedResponse({ type: ProductEntity })
+  @ApiCreatedResponse({ type: CreateProductResponse })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   async createProduct(
     @Request() request: any,
@@ -48,16 +46,15 @@ export class ProductController {
   @Get(':id')
   @SerializeExclude(CreateProductResponse)
   @ApiOperation({ summary: 'Get a product by ID' })
-  @ApiOkResponse({ type: ProductEntity })
+  @ApiOkResponse({ type: CreateProductResponse })
   @ApiNotFoundResponse({ description: 'Product not found' })
   async getProductById(@Param('id') id: number): Promise<ProductEntity> {
     return await this.productService.getProductById(id);
   }
 
   @Get()
-  @SerializeExclude(CreateProductResponse)
   @ApiOperation({ summary: 'Get all products' })
-  @ApiOkResponse({ type: ProductEntity, isArray: true })
+  @ApiOkResponse({ type: CreateProductResponse, isArray: true })
   async getAllProducts(): Promise<ProductEntity[]> {
     return await this.productService.getAllProducts();
   }
@@ -65,7 +62,7 @@ export class ProductController {
   @Delete(':id')
   @SerializeExclude(CreateProductResponse)
   @ApiOperation({ summary: 'Delete a product by ID' })
-  @ApiOkResponse({ type: ProductEntity })
+  @ApiOkResponse({ type: CreateProductResponse })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   async deleteUserProductByProductId(
     @Request() request: any,
